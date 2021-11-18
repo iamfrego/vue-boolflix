@@ -1,15 +1,21 @@
 <template>
   <div id="app">
-    <Search />
+    <Header />
+    <Main />
+    <Footer />
   </div>
 </template>
 
 <script>
-import Search from "./components/Search.vue";
+import Header from "./components/Header.vue";
+import Main from "./components/Main.vue";
+import Footer from "./components/Footer.vue";
 export default {
   name: "App",
   components: {
-    Search,
+    Header,
+    Main,
+    Footer,
   },
 };
 </script>
