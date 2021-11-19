@@ -4,8 +4,8 @@
       <Search @search-film="titleSearch" />
     </div>
     <h1 class="text-white">Film</h1>
-    <ul>
-      <li v-for="film in films" :key="film.id">
+    <div class="row row-cols-5">
+      <div class="col" v-for="film in films" :key="film.id">
         <div class="img_wrap">
           <img
             v-if="film.poster_path !== null"
@@ -52,18 +52,19 @@
             </span>
           </div>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
 
     <h1 class="text-white">Serie TV</h1>
-    <ul>
-      <li v-for="serie in series" :key="serie.id">
+    <div class="row row-cols-5">
+      <div class="col" v-for="serie in series" :key="serie.id">
         <div class="img_wrap">
           <img
             v-if="serie.poster_path !== null"
             :src="'https://image.tmdb.org/t/p/w342' + serie.poster_path"
             :alt="serie.name"
           />
+          <img v-else src="https://http.cat/417" alt="" />
         </div>
         <p class="text-white">{{ serie.name }}</p>
         <p class="text-white">{{ serie.original_name }}</p>
@@ -103,8 +104,8 @@
             </span>
           </div>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </template>
 
