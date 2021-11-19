@@ -1,8 +1,9 @@
 <template>
   <div class="main">
     <Search @search-film="titleSearch" />
+    <h1>Film</h1>
     <ul>
-      <li v-for="film in globalSearch" :key="film.id">
+      <li v-for="film in films" :key="film.id">
         <p>{{ film.title }}</p>
         <p>{{ film.original_title }}</p>
         <div class="language">
@@ -21,6 +22,29 @@
         </div>
         <span> {{ film.original_language }}</span>
         <p>{{ film.vote_average }}</p>
+      </li>
+    </ul>
+    <h1>Serie TV</h1>
+    <ul>
+      <li v-for="serie in series" :key="serie.id">
+        <p>{{ serie.name }}</p>
+        <p>{{ serie.original_name }}</p>
+        <div class="language">
+          <span v-if="serie.original_language == 'en'">
+            <flag iso="us" />
+          </span>
+          <span v-else-if="serie.original_language == 'ja'">
+            <flag iso="jp" />
+          </span>
+          <span v-else-if="serie.original_language == 'zh'">
+            <flag iso="cn" />
+          </span>
+          <span v-else>
+            <flag :iso="serie.original_language" />
+          </span>
+        </div>
+        <span> {{ serie.original_language }}</span>
+        <p>{{ serie.vote_average }}</p>
       </li>
     </ul>
   </div>
@@ -42,24 +66,13 @@ export default {
     };
   },
 
-  computed: {
-    globalSearch() {
-      return [...this.films, ...this.series];
-    },
-  },
   methods: {
     titleSearch(films) {
       this.title = films;
 
-      let movie = {
-        method: "get",
-        url: `https://api.themoviedb.org/3/search/movie?api_key=2098b5dfde8029414f02b0a439961147&query=${this.title}`,
-      };
+      var movie = `https://api.themoviedb.org/3/search/movie?api_key=2098b5dfde8029414f02b0a439961147&query=${this.title}`;
 
-      let series = {
-        method: "get",
-        url: `https://api.themoviedb.org/3/tv/popular?api_key=2098b5dfde8029414f02b0a439961147&query=${this.title}`,
-      };
+      var series = `https://api.themoviedb.org/3/search/tv?api_key=2098b5dfde8029414f02b0a439961147&query=${this.title}`;
 
       axios.get(movie).then((r) => {
         this.films = r.data.results;
