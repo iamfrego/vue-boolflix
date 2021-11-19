@@ -8,8 +8,9 @@
           <img
             v-if="film.poster_path !== null"
             :src="'https://image.tmdb.org/t/p/w342' + film.poster_path"
-            alt=""
+            :alt="film.name"
           />
+          <img v-else src="https://http.cat/417" alt="" />
         </div>
         <p>{{ film.title }}</p>
         <p>{{ film.original_title }}</p>
@@ -28,9 +29,28 @@
           </span>
         </div>
         <span> {{ film.original_language }}</span>
-        <p>{{ film.vote_average }}</p>
+        <div class="vote">
+          <div v-if="parseInt((film.vote_average / 2).toFixed(0)) !== 0">
+            <span
+              v-for="n in parseInt((film.vote_average / 2).toFixed(0))"
+              :key="n.index"
+            >
+              <i class="fa fa-star"></i>
+            </span>
+            <span
+              v-for="n in 5 - parseInt((film.vote_average / 2).toFixed(0))"
+              :key="n.index"
+            >
+              <i class="far fa-star"></i>
+            </span>
+          </div>
+          <div v-else>
+            <span v-for="n in 5" :key="n"> <i class="far fa-star"></i> </span>
+          </div>
+        </div>
       </li>
     </ul>
+
     <h1>Serie TV</h1>
     <ul>
       <li v-for="serie in series" :key="serie.id">
@@ -38,7 +58,7 @@
           <img
             v-if="serie.poster_path !== null"
             :src="'https://image.tmdb.org/t/p/w342' + serie.poster_path"
-            alt=""
+            :alt="serie.name"
           />
         </div>
         <p>{{ serie.name }}</p>
@@ -58,7 +78,25 @@
           </span>
         </div>
         <span> {{ serie.original_language }}</span>
-        <p>{{ serie.vote_average }}</p>
+        <div class="vote">
+          <div v-if="parseInt((serie.vote_average / 2).toFixed(0)) !== 0">
+            <span
+              v-for="n in parseInt((serie.vote_average / 2).toFixed(0))"
+              :key="n.index"
+            >
+              <i class="fa fa-star"></i>
+            </span>
+            <span
+              v-for="n in 5 - parseInt((serie.vote_average / 2).toFixed(0))"
+              :key="n.index"
+            >
+              <i class="far fa-star"></i>
+            </span>
+          </div>
+          <div v-else>
+            <span v-for="n in 5" :key="n"> <i class="far fa-star"></i> </span>
+          </div>
+        </div>
       </li>
     </ul>
   </div>
