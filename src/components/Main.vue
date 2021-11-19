@@ -12,7 +12,7 @@
             :src="'https://image.tmdb.org/t/p/w342' + film.poster_path"
             :alt="film.name"
           />
-          <img v-else src="https://http.cat/417" alt="" />
+          <img v-else src="https://http.cat/417" alt="" class="img-fluid" />
         </div>
         <p class="text-white">{{ film.title }}</p>
         <p class="text-white">{{ film.original_title }}</p>
@@ -64,7 +64,7 @@
             :src="'https://image.tmdb.org/t/p/w342' + serie.poster_path"
             :alt="serie.name"
           />
-          <img v-else src="https://http.cat/417" alt="" />
+          <img v-else src="https://http.cat/417" alt="" class="img-fluid" />
         </div>
         <p class="text-white">{{ serie.name }}</p>
         <p class="text-white">{{ serie.original_name }}</p>
@@ -146,12 +146,8 @@ export default {
 </script>
 
 <style>
-.search-box {
-  position: fixed;
-  top: 50px;
-  right: 25px;
-  left: 0;
-  z-index: 1030;
+.main {
+  margin-top: 100px;
 }
 .active_star {
   color: yellow;

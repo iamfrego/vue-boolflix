@@ -10,4 +10,7 @@
 export default {};
 </script>
 <style>
+.logo {
+  padding: 2rem;
+}
 </style>
