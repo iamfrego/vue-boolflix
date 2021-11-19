@@ -5,7 +5,23 @@
       <li v-for="film in films" :key="film.id">
         <p>{{ film.title }}</p>
         <p>{{ film.original_title }}</p>
-        <p>{{ film.original_language }}</p>
+
+        <div class="language">
+          <span>Lingua: </span>
+          <span v-if="film.original_language == 'en'">
+            <flag iso="gb" />
+          </span>
+          <span v-else-if="film.original_language == 'zh'">
+            <flag iso="cn" />
+          </span>
+          <span v-else-if="film.original_language == 'ja'">
+            <flag iso="jp" />
+          </span>
+          <span v-else>
+            {{ film.original_language }}
+          </span>
+        </div>
+
         <p>{{ film.vote_average }}</p>
       </li>
     </ul>
@@ -24,6 +40,7 @@ export default {
     return {
       films: [],
       title: "",
+      flag: "riginal_language",
     };
   },
   mounted() {},
