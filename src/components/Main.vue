@@ -4,6 +4,13 @@
     <h1>Film</h1>
     <ul>
       <li v-for="film in films" :key="film.id">
+        <div class="img_wrap">
+          <img
+            v-if="film.poster_path !== null"
+            :src="'https://image.tmdb.org/t/p/w342' + film.poster_path"
+            alt=""
+          />
+        </div>
         <p>{{ film.title }}</p>
         <p>{{ film.original_title }}</p>
         <div class="language">
@@ -27,6 +34,13 @@
     <h1>Serie TV</h1>
     <ul>
       <li v-for="serie in series" :key="serie.id">
+        <div class="img_wrap">
+          <img
+            v-if="serie.poster_path !== null"
+            :src="'https://image.tmdb.org/t/p/w342' + serie.poster_path"
+            alt=""
+          />
+        </div>
         <p>{{ serie.name }}</p>
         <p>{{ serie.original_name }}</p>
         <div class="language">
