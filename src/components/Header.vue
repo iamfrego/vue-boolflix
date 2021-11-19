@@ -1,5 +1,5 @@
 <template>
-  <div class="header bg-black d-flex fixed-top">
+  <div class="header d-flex fixed-top">
     <div class="logo pb-4">
       <img src="../assets/img/logo.svg" alt="" />
     </div>
@@ -10,6 +10,9 @@
 export default {};
 </script>
 <style>
+.header {
+  background-color: #181818;
+}
 .logo {
   padding: 2rem;
 }
