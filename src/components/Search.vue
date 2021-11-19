@@ -4,7 +4,7 @@
       type="text"
       placeholder="Inserisci Titolo"
       v-model="title"
-      class="form-control me-2"
+      class="me-2"
     />
     <button @click="$emit('search-film', title)" class="btn btn-light">
       Search
@@ -26,6 +26,7 @@ export default {
 .fixed_search {
   position: fixed;
   top: 35px;
+  right: 40px;
   z-index: 10000;
 }
 </style>

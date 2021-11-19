@@ -6,14 +6,14 @@
     <!-- ./SEARCH -->
 
     <!-- FILM -->
-    <h1 class="text-white mb-5">Film</h1>
+    <h1 class="text-white mb-5">Film e Serie TV</h1>
 
     <div
       class="
         row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row row-cols-1
       "
     >
-      <div class="col mb-5" v-for="film in films" :key="film.id">
+      <div class="col mb-5" v-for="film in globalSearch" :key="film.id">
         <div class="img_wrap text-center">
           <img
             v-if="film.poster_path !== null"
@@ -22,11 +22,14 @@
           />
           <img v-else src="https://http.cat/206" alt="" class="img-fluid" />
         </div>
-        <!-- ./IMAGE OF FILM -->
+        <!-- ./IMAGE OF film -->
         <div class="info_film">
           <div class="title-box text-white p-6">
-            <h3>Titolo: {{ film.title }}</h3>
-            <p>Titolo originale: {{ film.original_title }}</p>
+            <h3>Titolo: {{ film.title || film.name }}</h3>
+            <p>
+              Titolo originale:
+              {{ film.original_title || film.original_name }}
+            </p>
           </div>
           <!-- ./TITLE BOX -->
           <div class="language-box">
@@ -83,78 +86,7 @@
         </div>
       </div>
     </div>
-    <!-- SERIE TV  -->
-    <h1 class="text-white mb-5">Serie TV</h1>
-    <div class="row row-cols-5">
-      <div class="col mb-5" v-for="serie in series" :key="serie.id">
-        <div class="img_wrap text-center">
-          <img
-            v-if="serie.poster_path !== null"
-            :src="'https://image.tmdb.org/t/p/w342' + serie.poster_path"
-            :alt="serie.name"
-          />
-          <img v-else src="https://http.cat/206" alt="" class="img-fluid" />
-        </div>
-        <!-- ./IMAGE OF serie -->
-        <div class="info_serie">
-          <div class="title-box text-white p-6">
-            <h3>Titolo: {{ serie.name }}</h3>
-            <p>Titolo originale: {{ serie.original_name }}</p>
-          </div>
-          <!-- ./TITLE BOX -->
-          <div class="language-box">
-            <div class="language text-center">
-              <span v-if="serie.original_language == 'en'">
-                <flag iso="us" />
-              </span>
-              <span v-else-if="serie.original_language == 'ja'">
-                <flag iso="jp" />
-              </span>
-              <span v-else-if="serie.original_language == 'zh'">
-                <flag iso="cn" />
-              </span>
-              <span v-else>
-                <flag :iso="serie.original_language" />
-              </span>
-            </div>
-            <div class="text-white text-center">
-              {{ serie.original_language }}
-            </div>
-          </div>
-          <!-- ./LANGUAGE -->
-          <div class="vote text-center">
-            <div v-if="parseInt((serie.vote_average / 2).toFixed(0)) !== 0">
-              <span
-                v-for="n in parseInt((serie.vote_average / 2).toFixed(0))"
-                :key="n.index"
-              >
-                <i class="fa fa-star active_star"></i>
-              </span>
-              <span
-                v-for="n in 5 - parseInt((serie.vote_average / 2).toFixed(0))"
-                :key="n.index"
-              >
-                <i class="far fa-star text-white"></i>
-              </span>
-            </div>
-            <div v-else>
-              <span v-for="n in 5" :key="n">
-                <i class="far fa-star text-white"></i>
-              </span>
-            </div>
-          </div>
-          <!-- ./VOTE -->
-          <div class="overview text-white">
-            <div v-if="serie.overview.length < 200" class="overview">
-              {{ serie.overview }}
-            </div>
-            <div v-else class="overview">
-              {{ serie.overview.substr(0, 200) + "..." }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- /FILM -->
   </div>
 </template>
 
@@ -172,6 +104,12 @@ export default {
       series: [],
       title: "",
     };
+  },
+
+  computed: {
+    globalSearch() {
+      return [...this.films, ...this.series];
+    },
   },
 
   methods: {
