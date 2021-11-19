@@ -1,5 +1,9 @@
 <template>
-  <div class="header"></div>
+  <div class="header bg-black d-flex">
+    <div class="logo pb-4">
+      <img src="../assets/img/logo.svg" alt="" />
+    </div>
+  </div>
 </template>
 
 <script>

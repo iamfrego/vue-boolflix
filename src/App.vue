@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="py-5 px-3">
     <Header />
     <Main />
     <Footer />
@@ -21,4 +21,5 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
 </style>
