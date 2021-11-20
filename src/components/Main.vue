@@ -26,7 +26,13 @@
             <img v-else src="https://http.cat/206" alt="" class="img-fluid" />
           </div>
           <!-- ./IMAGE OF film -->
-          <div class="info_film bg-secondary h-100">
+          <div
+            class="info_film h-100"
+            :style="{
+              backgroundImage:
+                'url (https://image.tmdb.org/t/p/w342' + film.poster_path + ')',
+            }"
+          >
             <div
               class="title-box text-white p-6"
               v-if="
@@ -34,7 +40,7 @@
                 film.name !== film.original_name
               "
             >
-              <h3 class="text-center">Titolo: {{ film.title || film.name }}</h3>
+              <h3 class="text-center">{{ film.title || film.name }}</h3>
               <p>
                 Titolo originale:
                 {{ film.original_title || film.original_name }}
@@ -85,11 +91,11 @@
             </div>
             <!-- ./VOTE -->
             <div class="overview text-white">
-              <div v-if="film.overview.length < 200" class="overview">
+              <div v-if="film.overview.length < 100" class="overview">
                 {{ film.overview }}
               </div>
               <div v-else class="overview">
-                {{ film.overview.substr(0, 200) + "..." }}
+                {{ film.overview.substr(0, 100) + "..." }}
               </div>
             </div>
             <!-- /.overview  -->

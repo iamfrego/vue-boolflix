@@ -1,6 +1,7 @@
 <template>
   <div class="search fixed_search d-flex">
     <input
+      @keyup.enter="$emit('search-film', title)"
       type="text"
       placeholder="Inserisci Titolo"
       v-model="title"
