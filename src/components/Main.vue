@@ -5,7 +5,7 @@
     </div>
     <!-- ./SEARCH -->
 
-    <!-- FILM -->
+    <!-- FILM  and SERIE TVW -->
     <h1 class="text-white mb-5">Film e Serie TV</h1>
 
     <div
@@ -14,79 +14,79 @@
       "
     >
       <div class="col mb-5" v-for="film in globalSearch" :key="film.id">
-        <div class="img_wrap text-center">
-          <img
-            v-if="film.poster_path !== null"
-            :src="'https://image.tmdb.org/t/p/w342' + film.poster_path"
-            :alt="film.title"
-          />
-          <img v-else src="https://http.cat/206" alt="" class="img-fluid" />
-        </div>
-        <!-- ./IMAGE OF film -->
-        <div class="info_film">
-          <div class="title-box text-white p-6">
-            <h3>Titolo: {{ film.title || film.name }}</h3>
-            <p>
-              Titolo originale:
-              {{ film.original_title || film.original_name }}
-            </p>
+        <div class="film_card">
+          <div class="img_wrap text-center">
+            <img
+              v-if="film.poster_path !== null"
+              :src="'https://image.tmdb.org/t/p/w342' + film.poster_path"
+              :alt="film.title"
+            />
+            <img v-else src="https://http.cat/206" alt="" class="img-fluid" />
           </div>
-          <!-- ./TITLE BOX -->
-          <div class="language-box">
-            <div class="language text-center">
-              <span v-if="film.original_language == 'en'">
-                <flag iso="us" />
-              </span>
-              <span v-else-if="film.original_language == 'ja'">
-                <flag iso="jp" />
-              </span>
-              <span v-else-if="film.original_language == 'zh'">
-                <flag iso="cn" />
-              </span>
-              <span v-else>
-                <flag :iso="film.original_language" />
-              </span>
+          <!-- ./IMAGE OF film -->
+          <div class="info_film">
+            <div class="title-box text-white p-6">
+              <h3>Titolo: {{ film.title || film.name }}</h3>
+              <p>
+                Titolo originale:
+                {{ film.original_title || film.original_name }}
+              </p>
             </div>
-            <div class="text-white text-center">
-              {{ film.original_language }}
+            <!-- ./TITLE BOX -->
+            <div class="language-box">
+              <div class="language text-center">
+                <span v-if="film.original_language == 'en'">
+                  <flag iso="us" />
+                </span>
+                <span v-else-if="film.original_language == 'ja'">
+                  <flag iso="jp" />
+                </span>
+                <span v-else-if="film.original_language == 'zh'">
+                  <flag iso="cn" />
+                </span>
+                <span v-else>
+                  <flag :iso="film.original_language" />
+                </span>
+              </div>
+              <div class="text-white text-center">
+                {{ film.original_language }}
+              </div>
             </div>
+            <!-- ./LANGUAGE -->
+            <div class="vote py-3 text-center">
+              <div v-if="parseInt((film.vote_average / 2).toFixed(0)) !== 0">
+                <span
+                  v-for="n in parseInt((film.vote_average / 2).toFixed(0))"
+                  :key="n.index"
+                >
+                  <i class="fa fa-star active_star"></i>
+                </span>
+                <span
+                  v-for="n in 5 - parseInt((film.vote_average / 2).toFixed(0))"
+                  :key="n.index"
+                >
+                  <i class="far fa-star text-white"></i>
+                </span>
+              </div>
+              <div v-else class="text-white">
+                <p>N/A</p>
+              </div>
+            </div>
+            <!-- ./VOTE -->
+            <div class="overview text-white">
+              <div v-if="film.overview.length < 200" class="overview">
+                {{ film.overview }}
+              </div>
+              <div v-else class="overview">
+                {{ film.overview.substr(0, 200) + "..." }}
+              </div>
+            </div>
+            <!-- /.overview  -->
           </div>
-          <!-- ./LANGUAGE -->
-          <div class="vote text-center">
-            <div v-if="parseInt((film.vote_average / 2).toFixed(0)) !== 0">
-              <span
-                v-for="n in parseInt((film.vote_average / 2).toFixed(0))"
-                :key="n.index"
-              >
-                <i class="fa fa-star active_star"></i>
-              </span>
-              <span
-                v-for="n in 5 - parseInt((film.vote_average / 2).toFixed(0))"
-                :key="n.index"
-              >
-                <i class="far fa-star text-white"></i>
-              </span>
-            </div>
-            <div v-else>
-              <span v-for="n in 5" :key="n">
-                <i class="far fa-star text-white"></i>
-              </span>
-            </div>
-          </div>
-          <!-- ./VOTE -->
-          <div class="overview text-white">
-            <div v-if="film.overview.length < 200" class="overview">
-              {{ film.overview }}
-            </div>
-            <div v-else class="overview">
-              {{ film.overview.substr(0, 200) + "..." }}
-            </div>
-          </div>
-          <!-- /.overview  -->
         </div>
       </div>
+      <!-- /FILM -->
     </div>
-    <!-- /FILM -->
   </div>
 </template>
 
@@ -140,7 +140,28 @@ export default {
   margin-top: 100px;
 }
 
+.col {
+  height: 512px;
+}
+
+.info_film {
+  padding: 2rem;
+  display: none;
+}
+
 .active_star {
   color: yellow;
+}
+
+.film_card:hover {
+  border: #e50914 5px solid;
+}
+
+.film_card:hover .img_wrap {
+  display: none;
+}
+
+.film_card:hover .info_film {
+  display: block;
 }
 </style>
