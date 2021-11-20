@@ -6,7 +6,9 @@
     <!-- ./SEARCH -->
 
     <!-- FILM  and SERIE TVW -->
-    <h1 class="text-white mb-5">Film e Serie TV</h1>
+    <div class="nav d-flex justify-content-between">
+      <h1 class="text-white mb-5">Film e Serie TV</h1>
+    </div>
 
     <div
       class="
@@ -24,13 +26,22 @@
             <img v-else src="https://http.cat/206" alt="" class="img-fluid" />
           </div>
           <!-- ./IMAGE OF film -->
-          <div class="info_film">
-            <div class="title-box text-white p-6">
-              <h3>Titolo: {{ film.title || film.name }}</h3>
+          <div class="info_film bg-secondary h-100">
+            <div
+              class="title-box text-white p-6"
+              v-if="
+                film.title !== film.original_title ||
+                film.name !== film.original_name
+              "
+            >
+              <h3 class="text-center">Titolo: {{ film.title || film.name }}</h3>
               <p>
                 Titolo originale:
                 {{ film.original_title || film.original_name }}
               </p>
+            </div>
+            <div class="title-box text-white p-6" v-else>
+              <h3 class="text-center">Titolo: {{ film.title || film.name }}</h3>
             </div>
             <!-- ./TITLE BOX -->
             <div class="language-box">
@@ -155,6 +166,7 @@ export default {
 
 .film_card:hover {
   border: #e50914 5px solid;
+  height: 100%;
 }
 
 .film_card:hover .img_wrap {

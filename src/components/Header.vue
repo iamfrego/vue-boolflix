@@ -1,7 +1,7 @@
 <template>
   <div class="header d-flex fixed-top">
     <div class="logo pb-4">
-      <img src="../assets/img/logo.svg" alt="" />
+      <a href="./Main.vue"> <img src="../assets/img/logo.svg" alt="" /> </a>
     </div>
   </div>
 </template>
