@@ -26,13 +26,7 @@
             <img v-else src="https://http.cat/206" alt="" class="img-fluid" />
           </div>
           <!-- ./IMAGE OF film -->
-          <div
-            class="info_film h-100"
-            :style="{
-              backgroundImage:
-                'url (https://image.tmdb.org/t/p/w342' + film.poster_path + ')',
-            }"
-          >
+          <div class="info_film h-100">
             <div
               class="title-box text-white p-6"
               v-if="
