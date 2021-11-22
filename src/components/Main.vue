@@ -9,10 +9,9 @@
     <div class="nav d-flex justify-content-between">
       <h1 class="text-white mb-5">Film e Serie TV</h1>
     </div>
-
     <div
       class="
-        row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row row-cols-1
+        row row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-1
       "
     >
       <div class="col mb-5" v-for="film in globalSearch" :key="film.id">
@@ -26,22 +25,22 @@
             <img v-else src="https://http.cat/206" alt="" class="img-fluid" />
           </div>
           <!-- ./IMAGE OF film -->
-          <div class="info_film h-100">
+          <div class="info_film text-white h-100 d-flex flex-column justify-content-end px-2">
             <div
-              class="title-box text-white p-6"
+              class="title-box fw-normal p-6"
               v-if="
                 film.title !== film.original_title ||
                 film.name !== film.original_name
               "
             >
-              <h3 class="text-center">{{ film.title || film.name }}</h3>
+              <h1 class="text-center">{{ film.title || film.name }}</h1>
               <p>
                 Titolo originale:
                 {{ film.original_title || film.original_name }}
               </p>
             </div>
-            <div class="title-box text-white p-6" v-else>
-              <h3 class="text-center">Titolo: {{ film.title || film.name }}</h3>
+            <div class="title-box fw-normal p-6" v-else>
+              <h1 class="text-center">Titolo: {{ film.title || film.name }}</h1>
             </div>
             <!-- ./TITLE BOX -->
             <div class="language-box">
@@ -59,7 +58,7 @@
                   <flag :iso="film.original_language" />
                 </span>
               </div>
-              <div class="text-white text-center">
+              <div class="fw-normal text-center">
                 {{ film.original_language }}
               </div>
             </div>
@@ -76,15 +75,15 @@
                   v-for="n in 5 - parseInt((film.vote_average / 2).toFixed(0))"
                   :key="n.index"
                 >
-                  <i class="far fa-star text-white"></i>
+                  <i class="far fa-star fw-normal"></i>
                 </span>
               </div>
-              <div v-else class="text-white">
+              <div v-else class="fw-normal">
                 <p>N/A</p>
               </div>
             </div>
             <!-- ./VOTE -->
-            <div class="overview text-white">
+            <div class="overview mb-5">
               <div v-if="film.overview.length < 100" class="overview">
                 {{ film.overview }}
               </div>
@@ -155,25 +154,33 @@ export default {
   height: 512px;
 }
 
+.film_card{
+    position: relative;
+    cursor: pointer;
+}
+
+.film_card img{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 512px;
+}
+
 .info_film {
-  padding: 2rem;
-  display: none;
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+.film_card:hover{
+    height: 100%;
 }
 
 .active_star {
   color: yellow;
-}
-
-.film_card:hover {
-  border: #e50914 5px solid;
-  height: 100%;
-}
-
-.film_card:hover .img_wrap {
-  display: none;
-}
-
-.film_card:hover .info_film {
-  display: block;
 }
 </style>
